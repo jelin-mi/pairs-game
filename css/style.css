@@ -1,0 +1,50 @@
+body {
+    background-color: lightcoral;
+}
+
+.hidden {
+    display: none;
+}
+
+span {
+    font-size: 40px;
+}
+
+.game-container {
+    width: 1040px;
+    height: 800px;
+    margin: 100px auto;
+    background-color: lightseagreen;
+}
+
+.game-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 80px;
+}
+
+.score {
+    padding-left: 80px;
+}
+
+.time {
+    padding-right: 80px;
+}
+
+.cards {
+    width: 800px;
+    height: 500px;
+    margin: 80px auto;
+    background-color: lightskyblue;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card {
+    width: 60px;
+    height: 100px;
+    background-color: maroon;
+}
