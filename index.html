@@ -4,66 +4,112 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="./css/style.css">
     <title>Game</title>
 </head>
 <body>
 
+<!-- SPLASH SCREEN -->
     <div id="splash-screen" class="">
         <p>this is a SPLASH screen</p>
         <button id="play">play</button>
+        <h1>Pairs game</h1>
+        <p>Instructions:</p>
     </div>
 
+<!-- GAME SCREEN -->
     <div id="game-screen" class="hidden">
         <p>this is a GAME screen</p>
         <button id="start">start</button>
         <button id="over">gameover</button>
         <button id="win">win</button>
+
+        <div class="game-container">
+            <div class="game-info">
+                <div class="score">
+                    <span>Score: 0</span>   <!-- This should be automated - score sums -->
+                </div>
+                <div class="time">
+                    <span>Time: 60</span>   <!-- This should be automated - time counts down-->
+                </div>
+            </div>
+            
+            <div class="cards">
+<!-- card-look to share some properties of front and back -->
+                <div id="card-1" class="card visible"> <!-- visible class for flip event -->
+                    <div class="flip-card-inner">
+                        <div class="card-front card-look">
+                            <img src="./img/sylvester.png" />
+                        </div>
+                        <div class="card-back card-look">
+                            <img src="./img/back.png" />
+                        </div>   
+                    </div>
+                </div>
+
+                <div id="card-2" class="card visible">
+                    <div class="flip-card-inner">
+                        <div class="card-front card-look">
+                            <img src="./img/tweety.png" />
+                        </div>
+                        <div class="card-back card-look">
+                            <img src="./img/back.png" />
+                        </div>      
+                    </div> 
+                </div>
+
+                <div id="card-3" class="card visible">
+                    <div class="flip-card-inner">
+                        <div class="card-front card-look">
+                            <img src="./img/minnie.png" />
+                        </div>
+                        <div class="card-back card-look">
+                            <img src="./img/back.png" />
+                        </div> 
+                    </div>    
+                </div>
+
+                <div id="card-4" class="card visible">
+                    <div class="flip-card-inner">
+                        <div class="card-front card-look">
+                            <img src="./img/mickey.png" />
+                        </div>
+                        <div class="card-back card-look">
+                            <img src="./img/back.png" />
+                        </div> 
+                    </div>
+                </div>
+
+
+
+                <!-- <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div>
+                <div class="card"></div> -->
+            </div>
+        </div>
+
     </div>
 
+<!-- GAME OVER SCREEN -->
     <div id="gameover" class="hidden">
         <p>this is a GAME OVER screen</p>
     </div>
 
+<!-- WIN SCREEN -->
     <div id="win-screen" class="hidden">
         <p>this is a WIN screen</p>
     </div>
 
 
-    <!-- <div class="game-container">
-        <div class="game-info">
-            <div class="score">
-                <span>Score: 0</span>
-            </div>
-            <div class="time">
-                <span>Time: 60</span>
-            </div>
-        </div>
-        <div class="cards">
-
-
-
-            <div class="card-1 front back"></div>
-            <div class="card-2"></div>
-            <div class="card-3"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-
-
-
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-            <div class="card"></div>
-        </div>
-    </div> -->
     <script src="/js/main.js"></script>
 </body>
 </html>

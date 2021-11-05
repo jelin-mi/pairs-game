@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     background-color: lightcoral;
 }
@@ -41,10 +45,50 @@ span {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+    gap: 25px;
 }
 
 .card {
-    width: 60px;
-    height: 100px;
-    background-color: maroon;
+    width: 125px;
+    height: 150px;
+}
+
+.card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.card-look {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+}
+
+.card-back {
+    background-color: yellow;
+}
+
+.card-front {
+    background-color: violet;
+    transform: rotateY(180deg);
+}
+
+.card-front img,
+.card-back img {
+    width: 70px;
+    height: auto;
+    position: absolute;
 }
