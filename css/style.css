@@ -53,9 +53,9 @@ span {
     height: 150px;
 }
 
-.card:hover .flip-card-inner {
+/* .card:hover .flip-card-inner {
     transform: rotateY(180deg);
-}
+} */
 
 .flip-card-inner {
     position: relative;
@@ -91,4 +91,8 @@ span {
     width: 70px;
     height: auto;
     position: absolute;
+}
+
+.visible {
+    display: none;
 }
