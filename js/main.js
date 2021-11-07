@@ -1,4 +1,6 @@
 window.addEventListener("load", function () {
+
+  
   const playButton = document.querySelector("#play");
 
   const startButton = document.querySelector("#start");
@@ -10,9 +12,20 @@ window.addEventListener("load", function () {
   const gameOverScreen = document.querySelector("#gameover");
   const winScreen = document.querySelector("#win-screen");
 
+  // Create cards - card name = image name
+  const sylvester = generateCard (1, "sylvester");
+  const tweety = generateCard (1, "tweety");
+  const minnie = generateCard (2, "minnie");
+  const mickey = generateCard (2, "mickey");
+
+  // Create game instance
+  const game = new Game([sylvester, tweety, minnie, mickey]);
+  
   playButton.addEventListener("click", function () {
     splashScreen.classList.add("hidden");
     gameScreen.classList.remove("hidden");
+    // Start GAME 
+    game.prepareCards();
   });
 
   startButton.addEventListener("click", function () {
@@ -20,6 +33,7 @@ window.addEventListener("load", function () {
     gameOverButton.classList.add("hidden");
     winButton.classList.add("hidden");
     gameScreen.classList.remove("hidden");
+    
   });
 
   gameOverButton.addEventListener("click", function () {
@@ -34,26 +48,20 @@ window.addEventListener("load", function () {
 
 });
 
-const sylvester = generateCard (1, "sylvester", "./img/sylvester.png");
-const tweety = generateCard (1, "tweety", "./img/tweety.png");
-const minnie = generateCard (2, "minnie", "./img/minnie.png");
-const mickey = generateCard (2, "mickey", "./img/mickey.png");
 
-/* console.log(sylvester); */
-
-function generateCard(partnerId, name, image) {
+function generateCard(partnerId, name) {
   return {
     partnerId: partnerId,
     name: name,
-    image: image
+    image: `../img/${name}.png`
   }; 
 }
 
 /* console.log(sylvester); */
 
 class Game {
-  constructor(time, score) {
-    this.cards = [];
+  constructor(cards=[],time=60, score=0 ) {
+    this.cards = cards;
     this.timeRemaining = time;
     this.scoreCounting = score;
     this.time = document.querySelector(".time span");
@@ -61,32 +69,31 @@ class Game {
   }
 
   prepareCards(){
-    /* this.cards.push(sylvester, tweety, minnie, mickey); */
+
     /* const listCards = document.querySelector("#cards"); */
-    this.cards.forEach(function(e){
+    console.log(this.cards);
+    this.cards.forEach(function(item){
       const parent = document.querySelector("#cards");
-      const card = document.createElement('div');
-      div.innerHTML = 
-      <div id="card-1" class="card visible">
+      const card = document.createElement("div");
+      console.log("HERE", item.name);
+
+      card.innerHTML = `
+      <div data-id="${item.partnerId}" class="card visible">
         <div class="flip-card-inner">
-          <div class="card-front card-look">
-            <img src="e./img/sylvester.png" />
-          </div>
           <div class="card-back card-look">
-            <img src="e./img/back.png" />
+            <img src="${item.image}" />
+          </div>
+          <div class="card-front card-look">
+            <img src="../img/back.png" />
           </div>
         </div>
-      </div>
+      </div>`;
       parent.appendChild(card);
     });
-
-
-    this.cards.document.createElement("sylvester")
-    div.appendChild(document.createTextNode('Hello world!'))
-
-
-  };
+  }
   
+  randomCards(){}
+
   startTimer(){}
 
   updateScore(){}
@@ -108,7 +115,6 @@ class Game {
   isMatch(){}
 }
 
-console.log(prepareCards());
 
 
 /* gameOver()
