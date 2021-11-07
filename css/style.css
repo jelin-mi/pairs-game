@@ -7,7 +7,7 @@ body {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 span {
@@ -83,7 +83,7 @@ span {
 
 .card-front {
     background-color: violet;
-    transform: rotateY(180deg);
+    display: flex;
 }
 
 .card-front img,
@@ -92,4 +92,3 @@ span {
     height: auto;
     position: absolute;
 }
-
