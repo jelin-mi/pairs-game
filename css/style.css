@@ -92,3 +92,7 @@ span {
     height: auto;
     position: absolute;
 }
+
+.solved {
+    background-color: white;
+}
