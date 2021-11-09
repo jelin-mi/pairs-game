@@ -14,10 +14,9 @@ window.addEventListener("load", function () {
   const tweety = generateCard (1, "tweety");
   const minnie = generateCard (2, "minnie");
   const mickey = generateCard (2, "mickey");
-  const back = generateCard (3, "back");    // just to check that adding a new card works
 
   // Create game instance
-  const game = new Game([sylvester, tweety, minnie, mickey, back]);
+  const game = new Game([sylvester, tweety, minnie, mickey]);
   /* console.log(sylvester); */
   
   // Switch among different screens
@@ -27,6 +26,7 @@ window.addEventListener("load", function () {
 
   // Start GAME 
     game.prepareCards();
+    
   });
 
   startButton.addEventListener("click", function () {
@@ -35,6 +35,9 @@ window.addEventListener("load", function () {
     winButton.classList.add("hidden");
     gameScreen.classList.remove("hidden");
     
+  
+   
+
   });
 
   gameOverButton.addEventListener("click", function () {
@@ -57,7 +60,6 @@ function generateCard(partnerId, name) {
   }; 
 }
 
-
 class Game {
   constructor(cards = [], time = 60, score = 0) {
     this.cards = cards;
@@ -67,6 +69,7 @@ class Game {
     this.score = document.querySelector(".score span");     // this needs to be added to the game: every click adds 1 to the Score
     this.selectedCard = null;    // typeof = Object
     this.solvedPairs = [];    //[8, 1, 2,...] list of partnerId
+    this._shuffle();
   }
   
   prepareCards(){
@@ -121,9 +124,15 @@ class Game {
             console.log("you found the pair");
             // when 2 cards match - you found the partner
             this.solvedPairs.push(item.partnerId);
-            frontCard.classList.add("solved");     // add class to the item = white bg for the moment --> ADD A DELAY WITH SETTIMEOUT
-            frontSelectedCard.classList.add("solved");
-            this.selectedCard = null;    // reset the cards, so I can compare another 2 cards I will click on (new selection)
+            
+            setTimeout(function(){
+              frontCard.classList.add("solved");     // add class to the item = white bg for the moment
+              frontSelectedCard.classList.add("solved");
+            }, 1000);
+            
+            this.selectedCard = null; 
+            
+            // reset the cards, so I can compare another 2 cards I will click on (new selection)
           } else {
             console.log("you failed");
             // when 2 cards do not match - you did not find the partner
@@ -131,7 +140,6 @@ class Game {
             this.selectedCard = null;
             // set Timeout to show the answer and hide it again
             setTimeout(function(){
-
               frontCard.classList.add("hidden");
               backCard.classList.remove("hidden");
               //Get DOM element that corresponds to the selectedCard object
@@ -152,14 +160,65 @@ class Game {
       });
 
       parent.appendChild(cardHTML);
+      
     });
+    
   }
 
-
-  randomCards(){
-    // Math.floor(Math.random())
-    // Randomize items in array this.cards
+  _shuffle() {
+    let currentIndex = this.cards.length,  randomIndex;
+  
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+  
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [this.cards[currentIndex], this.cards[randomIndex]] = [
+        this.cards[randomIndex], this.cards[currentIndex]];
+    }
   }
+  // Randomize items in array this.cards
+  // randomCards(){
+
+
+
+
+  //   this.cards.forEach(() => {
+  //     let randomCard = this.cards[Math.floor(Math.random() * this.cards.length-1)];
+  //     });
+
+  //     console.log(randomCard);
+  //     return randomCard;
+  //   // let itemRandom = this.cards[Math.floor(Math.random(item) * this.cards.length)];
+  //   // let item = this.cards(itemRandom);
+  // }
+
+   /*  for (let i = this.cards.length - 1; i > 0; i--) {
+      const randomCard = Math.floor(Math.random() * (i + 1));
+      [this.cards[i], this.cards[randomCard]] = [this.cards[randomCard], this.cards[i]];
+    } */
+    /* 
+    this.cards = this.cards.map((card, index) => {
+      card.style.order = index;
+  }); */
+    /* const randomCard = this.cards[Math.floor(Math.random() * this.cards.length-1)]; */
+   //  this.cards.sort();
+    
+  
+
+ /*  shuffleCards(cardsArray) {
+    for (let i = cardsArray.length - 1; i > 0; i--) {
+        const randIndex = Math.floor(Math.random() * (i + 1));
+        [cardsArray[i], cardsArray[randIndex]] = [cardsArray[randIndex], cardsArray[i]];
+    }
+    cardsArray = cardsArray.map((card, index) => {
+        card.style.order = index;
+    }); */
+
+
   
 
   startTimer(){}
@@ -167,7 +226,10 @@ class Game {
 
   /*
   gameOver()
-  victory() */
+  victory()
+  
+  ADD PLAY AGAIN BUTTON
+  */
   
 }
 
