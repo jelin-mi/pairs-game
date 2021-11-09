@@ -126,22 +126,19 @@ class Game {
               frontSelectedCard.classList.add("solved");
             }, 1000);
             
-            
-            // MOVE ON A WIN SCREEN
+            // reset the cards, so I can compare another 2 cards I will click on (new selection)
+            this.selectedCard = null; 
+
+            // MOVE TO THE WIN SCREEN
             if (this.solvedPairs.length == (this.cards.length/2)) {
               const gameScreen = document.querySelector("#game-screen");
                 const winScreen = document.querySelector("#win-screen");
-              function win (){
+              setTimeout(function(){
                 winScreen.classList.remove("hidden");
                 gameScreen.classList.add("hidden");
-              }
+              }, 2000);
               console.log("winner");
-              win();
             }
-
-            // reset the cards, so I can compare another 2 cards I will click on (new selection)
-            this.selectedCard = null; 
-            
 
           } else {
             console.log("you failed");
