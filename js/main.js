@@ -1,8 +1,8 @@
 window.addEventListener("load", function () {
   const playButton = document.querySelector("#play");
   const startButton = document.querySelector("#start");
-  const gameOverButton = document.querySelector("#over");
-  const winButton = document.querySelector("#win");
+  /* const gameOverButton = document.querySelector("#over");
+  const winButton = document.querySelector("#win"); */
 
   const splashScreen = document.querySelector("#splash-screen");
   const gameScreen = document.querySelector("#game-screen");
@@ -31,16 +31,12 @@ window.addEventListener("load", function () {
 
   startButton.addEventListener("click", function () {
     startButton.classList.add("hidden");
-    gameOverButton.classList.add("hidden");
-    winButton.classList.add("hidden");
+    /* gameOverButton.classList.add("hidden");
+    winButton.classList.add("hidden"); */
     gameScreen.classList.remove("hidden");
-    
-  
-   
-
   });
 
-  gameOverButton.addEventListener("click", function () {
+  /* gameOverButton.addEventListener("click", function () {
     gameScreen.classList.add("hidden");
     gameOverScreen.classList.remove("hidden");
   });
@@ -48,7 +44,7 @@ window.addEventListener("load", function () {
   winButton.addEventListener("click", function () {
     gameScreen.classList.add("hidden");
     winScreen.classList.remove("hidden");
-  });
+  }); */
 
 });
 
@@ -130,9 +126,23 @@ class Game {
               frontSelectedCard.classList.add("solved");
             }, 1000);
             
+            
+            // MOVE ON A WIN SCREEN
+            if (this.solvedPairs.length == (this.cards.length/2)) {
+              const gameScreen = document.querySelector("#game-screen");
+                const winScreen = document.querySelector("#win-screen");
+              function win (){
+                winScreen.classList.remove("hidden");
+                gameScreen.classList.add("hidden");
+              }
+              console.log("winner");
+              win();
+            }
+
+            // reset the cards, so I can compare another 2 cards I will click on (new selection)
             this.selectedCard = null; 
             
-            // reset the cards, so I can compare another 2 cards I will click on (new selection)
+
           } else {
             console.log("you failed");
             // when 2 cards do not match - you did not find the partner
@@ -180,47 +190,7 @@ class Game {
         this.cards[randomIndex], this.cards[currentIndex]];
     }
   }
-  // Randomize items in array this.cards
-  // randomCards(){
-
-
-
-
-  //   this.cards.forEach(() => {
-  //     let randomCard = this.cards[Math.floor(Math.random() * this.cards.length-1)];
-  //     });
-
-  //     console.log(randomCard);
-  //     return randomCard;
-  //   // let itemRandom = this.cards[Math.floor(Math.random(item) * this.cards.length)];
-  //   // let item = this.cards(itemRandom);
-  // }
-
-   /*  for (let i = this.cards.length - 1; i > 0; i--) {
-      const randomCard = Math.floor(Math.random() * (i + 1));
-      [this.cards[i], this.cards[randomCard]] = [this.cards[randomCard], this.cards[i]];
-    } */
-    /* 
-    this.cards = this.cards.map((card, index) => {
-      card.style.order = index;
-  }); */
-    /* const randomCard = this.cards[Math.floor(Math.random() * this.cards.length-1)]; */
-   //  this.cards.sort();
-    
   
-
- /*  shuffleCards(cardsArray) {
-    for (let i = cardsArray.length - 1; i > 0; i--) {
-        const randIndex = Math.floor(Math.random() * (i + 1));
-        [cardsArray[i], cardsArray[randIndex]] = [cardsArray[randIndex], cardsArray[i]];
-    }
-    cardsArray = cardsArray.map((card, index) => {
-        card.style.order = index;
-    }); */
-
-
-  
-
   startTimer(){}
   
 
