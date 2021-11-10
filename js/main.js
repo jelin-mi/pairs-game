@@ -7,14 +7,18 @@ window.addEventListener("load", function () {
   const gameOverScreen = document.querySelector("#gameover");
   const winScreen = document.querySelector("#win-screen");
 
-  // Create cards - card name = image name (line 56)
+  // Create cards - card name = image name (line 45)
   const sylvester = generateCard (1, "sylvester");
   const tweety = generateCard (1, "tweety");
-  const minnie = generateCard (2, "minnie");
-  const mickey = generateCard (2, "mickey");
+  const coyote = generateCard (2, "coyote");
+  const roadrunner = generateCard (2, "roadrunner");
+  const bunny = generateCard (3, "bunny");
+  const cazador = generateCard (3, "cazador");
+  const marvin_marciano = generateCard (4, "marvin_marciano");
+  const pato_lucas = generateCard (4, "pato_lucas");
 
   // Create game instance
-  const game = new Game([sylvester, tweety, minnie, mickey]);
+  const game = new Game([sylvester, tweety, coyote, roadrunner, bunny, cazador, marvin_marciano, pato_lucas]);
   
   // Switch among different screens
   playButton.addEventListener("click", function () {
@@ -33,10 +37,23 @@ window.addEventListener("load", function () {
     winScreen.classList.add("hidden"); 
 //  HOW TO RESET THE CARDS ??
 //  HOW TO RESET THE TIME ??     
-    gameScreen.classList.remove("hidden");
+    
+    /* gameScreen.classList.remove("hidden"); */
     startButton.classList.remove("hidden");
+    location.reload();
+    // clearInterval(game);
   });
+    // reload();
 });
+
+/* function reload(){
+  const container = document.querySelector("#game-container");
+  const content = container.innerHTML;
+  container.innerHTML= content; 
+  
+ //this line is to watch the result in console , you can remove it later	
+  console.log("Refreshed"); 
+} */
 
 function generateCard(partnerId, name) {
   return {
@@ -108,7 +125,6 @@ class Game {
               setTimeout(function(){
                 winScreen.classList.remove("hidden");
                 gameScreen.classList.add("hidden");
-                this.solvedPairs = null;
               }, 2000);
               console.log("WINNER");
             }
@@ -147,6 +163,7 @@ class Game {
   
   startCountDown(){
     // when click on start button --> start counting the Time down, starting at 60 seconds.
+    // when counter = 0, show Gameover screen
     let counter = 60;
     const startButton = document.querySelector("#start");
     
@@ -159,7 +176,6 @@ class Game {
         counter-= 1;
         console.log(counter);
         return counter;
-        
         }
     });
     }, 1000);
