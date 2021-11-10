@@ -1,9 +1,70 @@
+@font-face {
+    font-family: 'looney_tunes';
+    src: url('fonts/looney_tunes_tilt_bt-webfont.woff2') format('woff2'),
+         url('fonts/looney_tunes_tilt_bt-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 * {
     box-sizing: border-box;
 }
 
+
 body {
-    background-color: lightcoral;
+   margin: 0;
+   padding: 0;
+   width: 100%;
+   height: 100%;
+   overflow-x: hidden;
+}
+
+div#splash-screen{
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    text-align: center;
+    background-image: url(../img/background_looney_tunes.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.container-center{
+    max-width: 980px;
+    width: 100%;
+    height: 500px;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top:0;
+    bottom: 0;
+    margin: auto;
+}
+
+button#play {
+    max-width: 250px;
+    border: none;
+    border-radius: 100px;
+    line-height: 20px;
+    padding: 0.7em 1.2em;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0 auto;
+    box-shadow: 2px 4px 3px rgba(360,360,360,0.3);
+
+}
+
+
+h1{
+    font-size: 180px;
+    padding: 0;
+    margin: 0;
+    padding: 50px 0;
+    font-family: 'looney_tunes';
+    text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+    color: #fff;
 }
 
 .hidden {
@@ -97,4 +158,12 @@ span {
 
 .solved {
     background-color: white;
+}
+
+#countdown {
+    font-size: 50px;
+}
+
+p {
+    color: lightblue;
 }

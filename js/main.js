@@ -34,10 +34,14 @@ window.addEventListener("load", function () {
     /* gameOverButton.classList.add("hidden");
     winButton.classList.add("hidden"); */
     gameScreen.classList.remove("hidden");
+    /* game.startCountDown(); */
   });
 
   playAgainButton.addEventListener("click", function () {
     winScreen.classList.add("hidden");
+    // Start GAME 
+    /* game.prepareCards();
+    game._shuffle();  */ // NO LO PILLA
 
 ///////  HOW TO RESET THE CARDS ??
 
@@ -55,6 +59,8 @@ window.addEventListener("load", function () {
     winScreen.classList.remove("hidden");
   }); */
 
+  // RESET THE GAME
+
 });
 
 function generateCard(partnerId, name) {
@@ -66,13 +72,17 @@ function generateCard(partnerId, name) {
 }
 
 class Game {
-  constructor(cards = [], time = 60, score = 0) {
+  constructor(cards = [], counter = 60, score = 0) {
     this.cards = cards;
-    this.timeRemaining = time;    // this needs to be added to the game
-    this.time = document.querySelector(".time span");     // this needs to be added to the game
+    this.counter = counter;
+    /* this.counter = document.querySelector("#countdown"); */
+
     this.selectedCard = null;    // typeof = Object
     this.solvedPairs = [];    //[8, 1, 2,...] list of partnerId
+    this.startCountDown();
     this._shuffle();
+    
+
   }
   
   prepareCards(){
@@ -138,7 +148,7 @@ class Game {
             // MOVE TO THE WIN SCREEN
             if (this.solvedPairs.length == (this.cards.length/2)) {
               const gameScreen = document.querySelector("#game-screen");
-                const winScreen = document.querySelector("#win-screen");
+              const winScreen = document.querySelector("#win-screen");
               setTimeout(function(){
                 winScreen.classList.remove("hidden");
                 gameScreen.classList.add("hidden");
@@ -195,11 +205,35 @@ class Game {
     }
   }
   
-  startTimer(){}
-  // when click on start button --> start counting the Time down.
+  startCountDown(){
+    // when click on start button --> start counting the Time down.
+    let counter = 60;
+    const startButton = document.querySelector("#start");
+    setInterval(function() {
+      startButton.addEventListener('click', () => {
+        if (counter >= 0){
+        const id = document.querySelector("#countdown");
+        id.innerHTML = counter;
+        counter-= 1;
+        console.log(id);
+        }
+    });
+
+    }, 1000);
+
+    if (counter === 0){
+      const gameScreen = document.querySelector("#game-screen");
+      const gameOverScreen = document.querySelector("#gameover");
+      gameOverScreen.classList.remove("hidden");
+      gameScreen.classList.add("hidden");
+    }
+
+    if(counter < 10){
+      return "0" + counter;
+     }
+  }
 
 
-  
 }
 
 
