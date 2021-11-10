@@ -1,6 +1,7 @@
 window.addEventListener("load", function () {
   const playButton = document.querySelector("#play");
   const startButton = document.querySelector("#start");
+  const playAgainButton = document.querySelector("#play-again");
   /* const gameOverButton = document.querySelector("#over");
   const winButton = document.querySelector("#win"); */
 
@@ -26,7 +27,6 @@ window.addEventListener("load", function () {
 
   // Start GAME 
     game.prepareCards();
-    
   });
 
   startButton.addEventListener("click", function () {
@@ -34,6 +34,15 @@ window.addEventListener("load", function () {
     /* gameOverButton.classList.add("hidden");
     winButton.classList.add("hidden"); */
     gameScreen.classList.remove("hidden");
+  });
+
+  playAgainButton.addEventListener("click", function () {
+    winScreen.classList.add("hidden");
+
+///////  HOW TO RESET THE CARDS ??
+
+    gameScreen.classList.remove("hidden");
+    startButton.classList.remove("hidden");
   });
 
   /* gameOverButton.addEventListener("click", function () {
@@ -60,9 +69,7 @@ class Game {
   constructor(cards = [], time = 60, score = 0) {
     this.cards = cards;
     this.timeRemaining = time;    // this needs to be added to the game
-    this.scoreCounting = score;    // this needs to be added to the game
     this.time = document.querySelector(".time span");     // this needs to be added to the game
-    this.score = document.querySelector(".score span");     // this needs to be added to the game: every click adds 1 to the Score
     this.selectedCard = null;    // typeof = Object
     this.solvedPairs = [];    //[8, 1, 2,...] list of partnerId
     this._shuffle();
@@ -102,7 +109,6 @@ class Game {
           console.log("CARD ALREADY SOLVED");
           return;
         }
-        // NEXT STEP --> Add 1 point to this.score
         
         console.log(item.partnerId);
 
@@ -136,6 +142,7 @@ class Game {
               setTimeout(function(){
                 winScreen.classList.remove("hidden");
                 gameScreen.classList.add("hidden");
+                this.solvedPairs = null // resetear las cards para el play again
               }, 2000);
               console.log("winner");
             }
@@ -189,14 +196,9 @@ class Game {
   }
   
   startTimer(){}
-  
+  // when click on start button --> start counting the Time down.
 
-  /*
-  gameOver()
-  victory()
-  
-  ADD PLAY AGAIN BUTTON
-  */
+
   
 }
 

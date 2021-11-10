@@ -21,19 +21,21 @@ span {
     background-color: lightseagreen;
 }
 
-.game-info {
+/* .game-info {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding-top: 80px;
-}
+} */
 
-.score {
+/* .score {
     padding-left: 80px;
-}
+} */
 
 .time {
-    padding-right: 80px;
+    /* padding-right: 80px; */
+    text-align: center;
+    padding-top: 50px;;
 }
 
 .cards {
