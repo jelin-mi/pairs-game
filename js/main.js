@@ -10,29 +10,37 @@ window.addEventListener("load", function () {
   // Create cards - card name = image name (line 45)
   const sylvester = generateCard (1, "sylvester");
   const tweety = generateCard (1, "tweety");
-  const coyote = generateCard (2, "coyote");
+  /* const coyote = generateCard (2, "coyote");
   const roadrunner = generateCard (2, "roadrunner");
   const bunny = generateCard (3, "bunny");
   const cazador = generateCard (3, "cazador");
   const marvin_marciano = generateCard (4, "marvin_marciano");
   const pato_lucas = generateCard (4, "pato_lucas");
   const speedy_gonzalez = generateCard (5, "speedy_gonzalez");
-  const slowpoke = generateCard (5, "slowpoke");
+  const slowpoke = generateCard (5, "slowpoke"); */
 
   // Create game instance
-  const game = new Game([sylvester, tweety, coyote, roadrunner, bunny, cazador, marvin_marciano, pato_lucas, speedy_gonzalez, slowpoke]);
+  let game = new Game([sylvester, tweety], new Chronometer());
   
+
   // Switch among different screens
   playButton.addEventListener("click", function () {
     splashScreen.classList.add("hidden");
     gameScreen.classList.remove("hidden");
   // Start GAME 
-    game.prepareCards();
+    
   });
 
   startButton.addEventListener("click", function () {
     startButton.classList.add("hidden");
     gameScreen.classList.remove("hidden");
+
+    game.prepareCards();
+
+
+
+
+
   });
 
   playAgainButton.addEventListener("click", function () {
@@ -40,22 +48,16 @@ window.addEventListener("load", function () {
 //  HOW TO RESET THE CARDS ??
 //  HOW TO RESET THE TIME ??     
     
-    /* gameScreen.classList.remove("hidden"); */
+    gameScreen.classList.remove("hidden");
     startButton.classList.remove("hidden");
-    location.reload();
+    game = new Game ([sylvester, tweety], new Chronometer());
+    game.prepareCards();
+    // location.reload(); --> refresh the entire page
     // clearInterval(game);
   });
     // reload();
 });
 
-/* function reload(){
-  const container = document.querySelector("#game-container");
-  const content = container.innerHTML;
-  container.innerHTML= content; 
-  
- //this line is to watch the result in console , you can remove it later	
-  console.log("Refreshed"); 
-} */
 
 function generateCard(partnerId, name) {
   return {
@@ -66,19 +68,33 @@ function generateCard(partnerId, name) {
 }
 
 class Game {
-  constructor(cards = [], counter = 10) {
+  constructor(cards = [],chrono, counter = 10) {
     this.cards = cards;
     this.counter = counter;
     this.intervalId = null;
     this.selectedCard = null;
     this.solvedPairs = [];
     this._shuffle();
-    this.startCountDown();
+    this.chrono = chrono
+
+  }
+
+  printTime() {
+    setInterval(() => {
+      const min = this.chrono.getMinutes();
+      const sec = this.chrono.getSeconds();
+      console.log(min, sec);
+    
+    }, 1000);
   }
   
   prepareCards(){
+    this.chrono.start();
+    this.printTime();
+    const parent = document.querySelector("#cards");
+    parent.innerHTML = "";
     this.cards.forEach((item) => {  
-      const parent = document.querySelector("#cards");
+      
       const cardHTML = document.createElement("div");
       
       cardHTML.id = item.name;
@@ -130,6 +146,7 @@ class Game {
                 gameScreen.classList.add("hidden");
               }, 2000);
               console.log("WINNER");
+              clearInterval(this.intervalId); // resetear el timer
             }
 
           } else {
@@ -164,35 +181,36 @@ class Game {
     }
   }
   
-  startCountDown(){
-    // when click on start button --> start counting the Time down, starting at 60 seconds.
-    // when counter = 0, show Gameover screen
+  // startCountDown(){
+  //   // when click on start button --> start counting the Time down, starting at 60 seconds.
+  //   // when counter = 0, show Gameover screen
 
-    const that = this;
-    const startButton = document.querySelector("#start");
+  //   const that = this;
+  //   const startButton = document.querySelector("#start");
 
-    this.intervalId = setInterval(function(){
-      const id = document.querySelector("#countdown");
-      id.innerHTML = that.counter;
+  //   this.intervalId = setInterval(function(){
+  //     const id = document.querySelector("#countdown");
+  //     id.innerHTML = that.counter;
 
-      startButton.addEventListener('click', () => {  
-          that.counter--;
-      });
+  //     startButton.addEventListener('click', () => {  
+  //         that.counter--;
+  //     });
 
-      if(that.counter <= 9){
-        "0" + that.counter;
-      } else that.counter+"";
+  //     if(that.counter <= 9){
+  //       "0" + that.counter;
+  //     } else that.counter+"";
 
-      if (that.counter === 0){
-        const gameScreen = document.querySelector("#game-screen");
-        const gameOverScreen = document.querySelector("#gameover");
-        gameOverScreen.classList.remove("hidden");
-        gameScreen.classList.add("hidden");
-      }
+  //     if (that.counter === 0){
+  //       const gameScreen = document.querySelector("#game-screen");
+  //       const gameOverScreen = document.querySelector("#gameover");
+  //       gameOverScreen.classList.remove("hidden");
+  //       gameScreen.classList.add("hidden");
+  //     }
+
+  //   }, 1000);
 
 
-    }, 1000);
+  // }
 
-  }
 
 }
