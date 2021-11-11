@@ -16,9 +16,11 @@ window.addEventListener("load", function () {
   const cazador = generateCard (3, "cazador");
   const marvin_marciano = generateCard (4, "marvin_marciano");
   const pato_lucas = generateCard (4, "pato_lucas");
+  const speedy_gonzalez = generateCard (5, "speedy_gonzalez");
+  const slowpoke = generateCard (5, "slowpoke");
 
   // Create game instance
-  const game = new Game([sylvester, tweety, coyote, roadrunner, bunny, cazador, marvin_marciano, pato_lucas]);
+  const game = new Game([sylvester, tweety, coyote, roadrunner, bunny, cazador, marvin_marciano, pato_lucas, speedy_gonzalez, slowpoke]);
   
   // Switch among different screens
   playButton.addEventListener("click", function () {
