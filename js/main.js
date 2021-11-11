@@ -21,43 +21,29 @@ window.addEventListener("load", function () {
 
   // Create game instance
   let game = new Game([sylvester, tweety], new Chronometer());
-  
 
   // Switch among different screens
   playButton.addEventListener("click", function () {
     splashScreen.classList.add("hidden");
     gameScreen.classList.remove("hidden");
-  // Start GAME 
     
   });
 
   startButton.addEventListener("click", function () {
     startButton.classList.add("hidden");
     gameScreen.classList.remove("hidden");
-
     game.prepareCards();
-
-
-
-
-
   });
 
   playAgainButton.addEventListener("click", function () {
     winScreen.classList.add("hidden"); 
-//  HOW TO RESET THE CARDS ??
-//  HOW TO RESET THE TIME ??     
-    
     gameScreen.classList.remove("hidden");
     startButton.classList.remove("hidden");
     game = new Game ([sylvester, tweety], new Chronometer());
     game.prepareCards();
-    // location.reload(); --> refresh the entire page
-    // clearInterval(game);
   });
-    // reload();
-});
 
+});
 
 function generateCard(partnerId, name) {
   return {
@@ -68,29 +54,44 @@ function generateCard(partnerId, name) {
 }
 
 class Game {
-  constructor(cards = [],chrono, counter = 10) {
+  constructor(cards = [], chrono, counter = 10) {
     this.cards = cards;
     this.counter = counter;
     this.intervalId = null;
     this.selectedCard = null;
     this.solvedPairs = [];
     this._shuffle();
-    this.chrono = chrono
-
+    this.chrono = chrono;
   }
 
   printTime() {
     setInterval(() => {
-      const min = this.chrono.getMinutes();
+      // const min = this.chrono.getMinutes();
       const sec = this.chrono.getSeconds();
-      console.log(min, sec);
+      const timerDOM = document.querySelector("#countdown");
+      timerDOM.innerHTML = sec;
+
+      // MOVE TO THE GAME OVER SCREEN
+      if(sec === 0){
+        const gameScreen = document.querySelector("#game-screen");
+        const gameOverScreen = document.querySelector("#gameover");
+        setTimeout(function(){
+          gameOverScreen.classList.remove("hidden");
+          gameScreen.classList.add("hidden");
+        }, 500);
+        console.log("GAME OVER");
+        clearInterval(this.intervalId); // resetear el timer
+      }
     
     }, 1000);
+    
+    
   }
   
   prepareCards(){
     this.chrono.start();
     this.printTime();
+    
     const parent = document.querySelector("#cards");
     parent.innerHTML = "";
     this.cards.forEach((item) => {  
@@ -180,37 +181,5 @@ class Game {
        this.cards[randomIndex], this.cards[currentIndex]];
     }
   }
-  
-  // startCountDown(){
-  //   // when click on start button --> start counting the Time down, starting at 60 seconds.
-  //   // when counter = 0, show Gameover screen
-
-  //   const that = this;
-  //   const startButton = document.querySelector("#start");
-
-  //   this.intervalId = setInterval(function(){
-  //     const id = document.querySelector("#countdown");
-  //     id.innerHTML = that.counter;
-
-  //     startButton.addEventListener('click', () => {  
-  //         that.counter--;
-  //     });
-
-  //     if(that.counter <= 9){
-  //       "0" + that.counter;
-  //     } else that.counter+"";
-
-  //     if (that.counter === 0){
-  //       const gameScreen = document.querySelector("#game-screen");
-  //       const gameOverScreen = document.querySelector("#gameover");
-  //       gameOverScreen.classList.remove("hidden");
-  //       gameScreen.classList.add("hidden");
-  //     }
-
-  //   }, 1000);
-
-
-  // }
-
 
 }
