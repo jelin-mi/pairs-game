@@ -66,13 +66,14 @@ function generateCard(partnerId, name) {
 }
 
 class Game {
-  constructor(cards = [], counter = 60, score = 0) {
+  constructor(cards = [], counter = 10) {
     this.cards = cards;
     this.counter = counter;
+    this.intervalId = null;
     this.selectedCard = null;
     this.solvedPairs = [];
-    this.startCountDown();
     this._shuffle();
+    this.startCountDown();
   }
   
   prepareCards(){
@@ -166,32 +167,32 @@ class Game {
   startCountDown(){
     // when click on start button --> start counting the Time down, starting at 60 seconds.
     // when counter = 0, show Gameover screen
-    let counter = 60;
+
+    const that = this;
     const startButton = document.querySelector("#start");
-    
-    setInterval(function() {
-      this.solvedPairs = null;
-      startButton.addEventListener('click', () => {
-        if (counter >= 0){
-        const id = document.querySelector("#countdown");
-        id.innerHTML = counter;
-        counter-= 1;
-        console.log(counter);
-        return counter;
-        }
-    });
+
+    this.intervalId = setInterval(function(){
+      const id = document.querySelector("#countdown");
+      id.innerHTML = that.counter;
+
+      startButton.addEventListener('click', () => {  
+          that.counter--;
+      });
+
+      if(that.counter <= 9){
+        "0" + that.counter;
+      } else that.counter+"";
+
+      if (that.counter === 0){
+        const gameScreen = document.querySelector("#game-screen");
+        const gameOverScreen = document.querySelector("#gameover");
+        gameOverScreen.classList.remove("hidden");
+        gameScreen.classList.add("hidden");
+      }
+
+
     }, 1000);
 
-    if (counter === 0){
-      const gameScreen = document.querySelector("#game-screen");
-      const gameOverScreen = document.querySelector("#gameover");
-      gameOverScreen.classList.remove("hidden");
-      gameScreen.classList.add("hidden");
-    }
-
-    if(counter < 10){
-      return "0" + counter;
-    }
   }
 
 }
