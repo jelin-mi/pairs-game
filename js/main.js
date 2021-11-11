@@ -2,6 +2,7 @@ window.addEventListener("load", function () {
   const playButton = document.querySelector("#play");
   const startButton = document.querySelector("#start");
   const playAgainButton = document.querySelector("#play-again");
+  const playAgain = document.querySelector("#again");
   const splashScreen = document.querySelector("#splash-screen");
   const gameScreen = document.querySelector("#game-screen");
   const gameOverScreen = document.querySelector("#gameover");
@@ -26,7 +27,7 @@ window.addEventListener("load", function () {
   playButton.addEventListener("click", function () {
     splashScreen.classList.add("hidden");
     gameScreen.classList.remove("hidden");
-    
+    // game.prepareCards();
   });
 
   startButton.addEventListener("click", function () {
@@ -37,6 +38,14 @@ window.addEventListener("load", function () {
 
   playAgainButton.addEventListener("click", function () {
     winScreen.classList.add("hidden"); 
+    gameScreen.classList.remove("hidden");
+    startButton.classList.remove("hidden");
+    game = new Game ([sylvester, tweety], new Chronometer());
+    game.prepareCards();
+  });
+
+  playAgain.addEventListener("click", function () {
+    gameOverScreen.classList.add("hidden"); 
     gameScreen.classList.remove("hidden");
     startButton.classList.remove("hidden");
     game = new Game ([sylvester, tweety], new Chronometer());
@@ -82,7 +91,8 @@ class Game {
         console.log("GAME OVER");
         clearInterval(this.intervalId); // resetear el timer
       }
-    
+      
+      
     }, 1000);
     
     
@@ -139,12 +149,14 @@ class Game {
             this.selectedCard = null; 
 
             // MOVE TO THE WIN SCREEN
+            
             if (this.solvedPairs.length == (this.cards.length/2)) {
               const gameScreen = document.querySelector("#game-screen");
               const winScreen = document.querySelector("#win-screen");
               setTimeout(function(){
                 winScreen.classList.remove("hidden");
                 gameScreen.classList.add("hidden");
+                ////
               }, 2000);
               console.log("WINNER");
               clearInterval(this.intervalId); // resetear el timer
