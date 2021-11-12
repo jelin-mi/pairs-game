@@ -10,20 +10,34 @@ window.addEventListener("load", function () {
   const gameOverScreen = document.querySelector("#gameover");
   const winScreen = document.querySelector("#win-screen");
 
-  // Create cards - card name = image name (line 45)
-  const sylvester = generateCard (1, "sylvester");
-  const tweety = generateCard (1, "tweety");
-  const coyote = generateCard (2, "coyote");
-  const roadrunner = generateCard (2, "roadrunner");
-  const bunny = generateCard (3, "bunny");
-  const cazador = generateCard (3, "cazador");
-  const marvin_marciano = generateCard (4, "marvin_marciano");
-  const pato_lucas = generateCard (4, "pato_lucas");
-  const speedy_gonzalez = generateCard (5, "speedy_gonzalez");
-  const slowpoke = generateCard (5, "slowpoke");
+  // Create cards - card name = image name
+  const sylvester = generateCard(1, "sylvester");
+  const tweety = generateCard(1, "tweety");
+  const coyote = generateCard(2, "coyote");
+  const roadrunner = generateCard(2, "roadrunner");
+  const bunny = generateCard(3, "bunny");
+  const cazador = generateCard(3, "cazador");
+  const marvin_marciano = generateCard(4, "marvin_marciano");
+  const pato_lucas = generateCard(4, "pato_lucas");
+  const speedy_gonzalez = generateCard(5, "speedy_gonzalez");
+  const slowpoke = generateCard(5, "slowpoke");
 
   // Create game instance
-  let game = new Game([sylvester, tweety, coyote, roadrunner, bunny, cazador, marvin_marciano, pato_lucas, speedy_gonzalez, slowpoke], new Chronometer(MAX_TIME) );
+  let game = new Game(
+    [
+      sylvester,
+      tweety,
+      coyote,
+      roadrunner,
+      bunny,
+      cazador,
+      marvin_marciano,
+      pato_lucas,
+      speedy_gonzalez,
+      slowpoke,
+    ],
+    new Chronometer(MAX_TIME)
+  );
 
   // Switch among different screens
   playButton.addEventListener("click", function () {
@@ -40,29 +54,56 @@ window.addEventListener("load", function () {
   });
 
   playAgainButton.addEventListener("click", function () {
-    winScreen.classList.add("hidden"); 
+    winScreen.classList.add("hidden");
     gameScreen.classList.remove("hidden");
     startButton.classList.remove("hidden");
-    game = new Game ([sylvester, tweety, coyote, roadrunner, bunny, cazador, marvin_marciano, pato_lucas, speedy_gonzalez, slowpoke], new Chronometer(MAX_TIME) );
+    game = new Game(
+      [
+        sylvester,
+        tweety,
+        coyote,
+        roadrunner,
+        bunny,
+        cazador,
+        marvin_marciano,
+        pato_lucas,
+        speedy_gonzalez,
+        slowpoke,
+      ],
+      new Chronometer(MAX_TIME)
+    );
     game.prepareCards();
   });
 
   playAgain.addEventListener("click", function () {
-    gameOverScreen.classList.add("hidden"); 
+    gameOverScreen.classList.add("hidden");
     gameScreen.classList.remove("hidden");
     startButton.classList.remove("hidden");
-    game = new Game ([sylvester, tweety, coyote, roadrunner, bunny, cazador, marvin_marciano, pato_lucas, speedy_gonzalez, slowpoke], new Chronometer(MAX_TIME) );
+    game = new Game(
+      [
+        sylvester,
+        tweety,
+        coyote,
+        roadrunner,
+        bunny,
+        cazador,
+        marvin_marciano,
+        pato_lucas,
+        speedy_gonzalez,
+        slowpoke,
+      ],
+      new Chronometer(MAX_TIME)
+    );
     game.prepareCards();
   });
-
 });
 
 function generateCard(partnerId, name) {
   return {
     partnerId: partnerId,
     name: name,
-    image: `img/${name}.png`
-  }; 
+    image: `img/${name}.png`,
+  };
 }
 
 class Game {
@@ -82,31 +123,28 @@ class Game {
       timerDOM.innerHTML = sec;
 
       // MOVE TO THE GAME OVER SCREEN
-      if(sec === 0){
+      if (sec === 0) {
         this.chrono.stop();
         const gameScreen = document.querySelector("#game-screen");
         const gameOverScreen = document.querySelector("#gameover");
-        setTimeout(function(){
+        setTimeout(function () {
           gameOverScreen.classList.remove("hidden");
           gameScreen.classList.add("hidden");
         }, 500);
-        console.log("GAME OVER");
         clearInterval(this.intervalId);
       }
     }, 1000);
-    
   }
-  
-  prepareCards(){
+
+  prepareCards() {
     const timerDOM = document.querySelector("#countdown");
     timerDOM.innerHTML = MAX_TIME;
-    
+
     const parent = document.querySelector("#cards");
     parent.innerHTML = "";
-    this.cards.forEach((item) => {  
-      
+    this.cards.forEach((item) => {
       const cardHTML = document.createElement("div");
-      
+
       cardHTML.id = item.name;
       cardHTML.classList.add("card");
       cardHTML.innerHTML = `
@@ -120,58 +158,54 @@ class Game {
         </div>
         `;
 
-      cardHTML.addEventListener('click', () => {
+      cardHTML.addEventListener("click", () => {
         const frontCard = cardHTML.querySelector(".card-front");
         const backCard = cardHTML.querySelector(".card-back");
         frontCard.classList.remove("hidden");
         backCard.classList.add("hidden");
-         
-        if (this.solvedPairs.includes(item.partnerId)){
-          console.log("CARD ALREADY SOLVED");
+
+        if (this.solvedPairs.includes(item.partnerId)) {
           return;
         }
-        console.log(item.partnerId);
 
-        if (!!this.selectedCard){
-        const selectedCardDOM = document.querySelector(`#${this.selectedCard.name}`);
-        const frontSelectedCard = selectedCardDOM.querySelector(".card-front");
-        const backCSelectedCard = selectedCardDOM.querySelector(".card-back");
-        
-          if(item.partnerId === this.selectedCard.partnerId){ 
-            console.log("YOU FOUND THE PAIR");
+        if (!!this.selectedCard) {
+          const selectedCardDOM = document.querySelector(
+            `#${this.selectedCard.name}`
+          );
+          const frontSelectedCard =
+            selectedCardDOM.querySelector(".card-front");
+          const backCSelectedCard = selectedCardDOM.querySelector(".card-back");
+
+          if (item.partnerId === this.selectedCard.partnerId) {
             this.solvedPairs.push(item.partnerId);
 
-            setTimeout(function(){
-              frontCard.classList.add("solved");   
+            setTimeout(function () {
+              frontCard.classList.add("solved");
               frontSelectedCard.classList.add("solved");
             }, 1000);
-            this.selectedCard = null; 
+            this.selectedCard = null;
 
             // MOVE TO THE WIN SCREEN
-            if (this.solvedPairs.length == (this.cards.length/2)) {
+            if (this.solvedPairs.length == this.cards.length / 2) {
               const gameScreen = document.querySelector("#game-screen");
               const winScreen = document.querySelector("#win-screen");
               this.chrono.stop();
-              setTimeout(function(){
+              setTimeout(function () {
                 winScreen.classList.remove("hidden");
                 gameScreen.classList.add("hidden");
               }, 500);
-              console.log("WINNER");
               clearTimeout(this.intervalId);
             }
-
           } else {
-            console.log("YOU FAILED");
 
             this.selectedCard = null;
-            setTimeout(function(){
+            setTimeout(function () {
               frontCard.classList.add("hidden");
               backCard.classList.remove("hidden");
               frontSelectedCard.classList.add("hidden");
               backCSelectedCard.classList.remove("hidden");
             }, 1000);
           }
-
         } else {
           this.selectedCard = item;
         }
@@ -179,21 +213,23 @@ class Game {
       parent.appendChild(cardHTML);
     });
   }
-  playGame(){
+  playGame() {
     this.chrono.start();
     this.printTime();
   }
 
   _shuffle() {
-    let currentIndex = this.cards.length,  randomIndex;
-  
+    let currentIndex = this.cards.length,
+      randomIndex;
+
     while (currentIndex != 0) {
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
 
       [this.cards[currentIndex], this.cards[randomIndex]] = [
-       this.cards[randomIndex], this.cards[currentIndex]];
+        this.cards[randomIndex],
+        this.cards[currentIndex],
+      ];
     }
   }
-
 }
