@@ -1,3 +1,5 @@
+const MAX_TIME = 10;
+
 window.addEventListener("load", function () {
   const playButton = document.querySelector("#play");
   const startButton = document.querySelector("#start");
@@ -21,35 +23,40 @@ window.addEventListener("load", function () {
   const slowpoke = generateCard (5, "slowpoke"); */
 
   // Create game instance
-  let game = new Game([sylvester, tweety], new Chronometer());
+  
+  let game = new Game([sylvester, tweety], new Chronometer(MAX_TIME) );
 
   // Switch among different screens
   playButton.addEventListener("click", function () {
     splashScreen.classList.add("hidden");
     gameScreen.classList.remove("hidden");
-    // game.prepareCards();
+    game.prepareCards();
   });
 
   startButton.addEventListener("click", function () {
     startButton.classList.add("hidden");
     gameScreen.classList.remove("hidden");
     game.prepareCards();
+    game.playGame();
   });
 
   playAgainButton.addEventListener("click", function () {
     winScreen.classList.add("hidden"); 
     gameScreen.classList.remove("hidden");
     startButton.classList.remove("hidden");
-    game = new Game ([sylvester, tweety], new Chronometer());
+    game = new Game ([sylvester, tweety], new Chronometer(MAX_TIME) );
     game.prepareCards();
+   
+  
   });
 
   playAgain.addEventListener("click", function () {
     gameOverScreen.classList.add("hidden"); 
     gameScreen.classList.remove("hidden");
     startButton.classList.remove("hidden");
-    game = new Game ([sylvester, tweety], new Chronometer());
+    game = new Game ([sylvester, tweety], new Chronometer(MAX_TIME) );
     game.prepareCards();
+    
   });
 
 });
@@ -63,9 +70,8 @@ function generateCard(partnerId, name) {
 }
 
 class Game {
-  constructor(cards = [], chrono, counter = 10) {
+  constructor(cards = [], chrono) {
     this.cards = cards;
-    this.counter = counter;
     this.intervalId = null;
     this.selectedCard = null;
     this.solvedPairs = [];
@@ -74,7 +80,7 @@ class Game {
   }
 
   printTime() {
-    setInterval(() => {
+    this.intervalId = setInterval(() => {
       // const min = this.chrono.getMinutes();
       const sec = this.chrono.getSeconds();
       const timerDOM = document.querySelector("#countdown");
@@ -82,6 +88,8 @@ class Game {
 
       // MOVE TO THE GAME OVER SCREEN
       if(sec === 0){
+        this.chrono.stop();
+        
         const gameScreen = document.querySelector("#game-screen");
         const gameOverScreen = document.querySelector("#gameover");
         setTimeout(function(){
@@ -99,8 +107,12 @@ class Game {
   }
   
   prepareCards(){
-    this.chrono.start();
-    this.printTime();
+    // GET TIMER OUT OF PREPARECARDS();
+    //this.chrono.start();
+    //this.printTime();
+
+    const timerDOM = document.querySelector("#countdown");
+    timerDOM.innerHTML = MAX_TIME;
     
     const parent = document.querySelector("#cards");
     parent.innerHTML = "";
@@ -153,13 +165,16 @@ class Game {
             if (this.solvedPairs.length == (this.cards.length/2)) {
               const gameScreen = document.querySelector("#game-screen");
               const winScreen = document.querySelector("#win-screen");
+              this.chrono.stop();
+              /*const timerDOM = document.querySelector("#countdown");
+              timerDOM.innerHTML = this.counter;*/
               setTimeout(function(){
                 winScreen.classList.remove("hidden");
                 gameScreen.classList.add("hidden");
                 ////
               }, 2000);
               console.log("WINNER");
-              clearInterval(this.intervalId); // resetear el timer
+              clearTimeout(this.intervalId); // resetear el timer
             }
 
           } else {
@@ -180,6 +195,10 @@ class Game {
       });
       parent.appendChild(cardHTML);
     });
+  }
+  playGame(){
+    this.chrono.start();
+    this.printTime();
   }
 
   _shuffle() {

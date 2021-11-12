@@ -5,8 +5,11 @@ class Chronometer {
     }
     start(){
         const that = this;
+        
         this.intervalId = setInterval(function(){
             that.currentTime--;
+            
+
       }, 1000);
     }
   
