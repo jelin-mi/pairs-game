@@ -61,7 +61,7 @@ function generateCard(partnerId, name) {
   return {
     partnerId: partnerId,
     name: name,
-    image: `../img/${name}.png`
+    image: `img/${name}.png`
   }; 
 }
 
@@ -115,7 +115,7 @@ class Game {
             <img src="${item.image}" />
           </div>
           <div class="card-back card-look ">
-            <img src="../img/back.png" />
+            <img src="img/back.png" />
           </div>
         </div>
         `;
