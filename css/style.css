@@ -1,4 +1,3 @@
-
 * {
     box-sizing: border-box;
 }
@@ -251,4 +250,18 @@ span {
     font-weight: bold;
     margin: 0 auto;
     box-shadow: 2px 4px 3px rgba(360,360,360,0.3);
+}
+
+button {
+    background-color: white;
+}
+
+.container-center p {
+    color: white;
+    width: 500px;
+    margin: 0 auto;
+    line-height: 34px;
+    margin-top: 60px;
+    font-size: 24px;
+    text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
 }
