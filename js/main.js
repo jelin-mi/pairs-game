@@ -13,18 +13,18 @@ window.addEventListener("load", function () {
   // Create cards - card name = image name (line 45)
   const sylvester = generateCard (1, "sylvester");
   const tweety = generateCard (1, "tweety");
-  /* const coyote = generateCard (2, "coyote");
+  const coyote = generateCard (2, "coyote");
   const roadrunner = generateCard (2, "roadrunner");
   const bunny = generateCard (3, "bunny");
   const cazador = generateCard (3, "cazador");
   const marvin_marciano = generateCard (4, "marvin_marciano");
   const pato_lucas = generateCard (4, "pato_lucas");
   const speedy_gonzalez = generateCard (5, "speedy_gonzalez");
-  const slowpoke = generateCard (5, "slowpoke"); */
+  const slowpoke = generateCard (5, "slowpoke");
 
   // Create game instance
   
-  let game = new Game([sylvester, tweety], new Chronometer(MAX_TIME) );
+  let game = new Game([sylvester, tweety, coyote, roadrunner, bunny, cazador, marvin_marciano, pato_lucas, speedy_gonzalez, slowpoke], new Chronometer(MAX_TIME) );
 
   // Switch among different screens
   playButton.addEventListener("click", function () {
@@ -44,7 +44,7 @@ window.addEventListener("load", function () {
     winScreen.classList.add("hidden"); 
     gameScreen.classList.remove("hidden");
     startButton.classList.remove("hidden");
-    game = new Game ([sylvester, tweety], new Chronometer(MAX_TIME) );
+    game = new Game ([sylvester, tweety, coyote, roadrunner, bunny, cazador, marvin_marciano, pato_lucas, speedy_gonzalez, slowpoke], new Chronometer(MAX_TIME) );
     game.prepareCards();
    
   
@@ -54,7 +54,7 @@ window.addEventListener("load", function () {
     gameOverScreen.classList.add("hidden"); 
     gameScreen.classList.remove("hidden");
     startButton.classList.remove("hidden");
-    game = new Game ([sylvester, tweety], new Chronometer(MAX_TIME) );
+    game = new Game ([sylvester, tweety, coyote, roadrunner, bunny, cazador, marvin_marciano, pato_lucas, speedy_gonzalez, slowpoke], new Chronometer(MAX_TIME) );
     game.prepareCards();
     
   });

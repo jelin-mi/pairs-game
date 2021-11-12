@@ -16,9 +16,43 @@ body {
    width: 100%;
    height: 100%;
    overflow-x: hidden;
+   font-family: sans-serif;
 }
 
 div#splash-screen{
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    text-align: center;
+    background-image: url(../img/background_looney_tunes.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+div#game-screen {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    text-align: center;
+    background-image: url(../img/warner_bros_water.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+div#gameover {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    text-align: center;
+    background-image: url(../img/img_gameover_wallpaper.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+div#win-screen {
     position: relative;
     height: 100vh;
     width: 100%;
@@ -54,6 +88,17 @@ button#play {
 
 }
 
+button#start {
+    max-width: 250px;
+    border: none;
+    border-radius: 10px;
+    line-height: 20px;
+    padding: 0.7em 1.2em;
+    font-size: 30px;
+    font-weight: bold;
+    box-shadow: 2px 4px 3px rgba(360, 360, 360, 0.3);
+}
+
 h1{
     font-size: 180px;
     padding: 0;
@@ -69,37 +114,65 @@ h1{
 }
 
 span {
-    font-size: 40px;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.flex-screen {
+    width: 1100px;
+    height: 80px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .game-container {
-    width: 1040px;
-    height: 800px;
+    max-width: 1100px;
+    height: 700px;
     margin: 100px auto;
-    background-color: lightseagreen;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
 }
 
 .time {
-    /* padding-right: 80px; */
-    text-align: center;
-    padding-top: 50px;;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    box-shadow: 2px 4px 3px rgb(255 255 255 / 30%);
+    padding: 10px;
+    height: 60px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    position: absolute;
+    right: 0;
+    width: 180px;
+}
+
+.time p {
+    padding: 0;
+    margin: 0;
 }
 
 .cards {
-    width: 800px;
-    height: 500px;
-    margin: 80px auto;
-    background-color: lightskyblue;
+    width: 1100px;
+    height: auto;
+    margin: 50px auto;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-    gap: 25px;
+    gap: 50px;
 }
 
 .card {
-    width: 125px;
-    height: 150px;
+    width: 180px;
+    height: 240px;
 }
 
 .flip-card-inner {
@@ -119,33 +192,70 @@ span {
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
-    border-radius: 15px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
-.card-back {
-    background-color: yellow;
-}
+.card-back {background-color: #fff;}
 
 .card-front {
-    background-color: violet;
+    background-color: #fff;
     display: flex;
 }
 
 .card-front img,
 .card-back img {
-    width: 70px;
+    width: 130px;
     height: auto;
     position: absolute;
 }
 
 .solved {
-    background-color: white;
+    display: none;
 }
 
 #countdown {
-    font-size: 50px;
+    font-size: 44px;
+    padding: 0;
+    font-weight: bold;
+    padding-left: 10px;
+    width: 50px;
+    text-align: right;
+    color: #E2182C;
 }
 
-p {
-    color: lightblue;
+.miyats {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+}
+
+.miyats p {
+    color: white;
+    font-size: 15px;;
+}
+
+#gameover h1 {
+    max-width: 500px;
+    width: 100%;
+    line-height: 170px;
+    color: #E2182C;
+    text-align: left;
+}
+
+#again,
+#play-again {
+    max-width: 250px;
+    border: none;
+    border-radius: 100px;
+    line-height: 20px;
+    padding: 0.7em 1.2em;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 0 auto;
+    box-shadow: 2px 4px 3px rgba(360,360,360,0.3);
 }

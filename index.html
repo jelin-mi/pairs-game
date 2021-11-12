@@ -4,57 +4,54 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <title>Game</title>
   </head>
   <body>
     <!-- SPLASH SCREEN -->
     <div id="splash-screen">
       <div class="container-center">
-        <!-- <p>this is a SPLASH screen</p> -->
         <h1>Pairs game</h1>
         <button id="play">play</button>
         <p>Instructions:</p>
+      </div>
+      <div class="miyats">
+        <p>developed by miyats</p>
       </div>
     </div>
 
     <!-- GAME SCREEN -->
     <div id="game-screen" class="hidden">
-      <p>this is a GAME screen</p>
-      <button id="start">start</button>
-      <!-- <button id="over">gameover</button>
-      <button id="win">win</button> -->
-
       <div class="game-container">
-        <!-- <div class="game-info"> -->
-          <!-- <div class="score">
-            <span>Score: 0</span>
-          </div> -->
+        <div class="flex-screen">
+          <button id="start">start</button>
           <div class="time">
-            <span>Time:</span>
+            <span>timer:</span>
             <p id="countdown">60</p>
           </div>
-        <!-- </div> -->
-
-        <div id="cards" class="cards">
-          
         </div>
+
+        <div id="cards" class="cards"></div>
       </div>
     </div>
 
     <!-- GAME OVER SCREEN -->
     <div id="gameover" class="hidden">
-      <p>this is a GAME OVER screen</p>
-      <button id="again">play again</button>
+      <div class="container-center">
+        <h1>Game Over</h1>
+        <button id="again">play again</button>
+      </div>
     </div>
 
     <!-- WIN SCREEN -->
     <div id="win-screen" class="hidden">
-      <p>this is a WIN screen</p>
-      <button id="play-again">play again</button>
+      <div class="container-center">
+        <h1>That's all Folks!</h1>
+        <button id="play-again">play again</button>
+      </div>
     </div>
 
-    <script src="./js/chrono.js"></script>
-    <script src="./js/main.js"></script>
+    <script src="js/chrono.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>
