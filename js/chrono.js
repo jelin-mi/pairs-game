@@ -1,5 +1,5 @@
 class Chronometer {
-    constructor(initialTime = 10) {
+    constructor(initialTime = 60) {
       this.currentTime = initialTime;
       this.intervalId = null;
     }
@@ -8,17 +8,8 @@ class Chronometer {
         
         this.intervalId = setInterval(function(){
             that.currentTime--;
-            
-
       }, 1000);
     }
-  
-    // arrow function
-  /*   start(callback){
-      this.intervalId = setInterval(() => {
-        this.currentTime++;
-      }, 1000);
-    }  */
     
     getMinutes() {
       let minutes = Math.floor(this.currentTime / 60);

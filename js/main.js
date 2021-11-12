@@ -1,4 +1,4 @@
-const MAX_TIME = 10;
+const MAX_TIME = 60;
 
 window.addEventListener("load", function () {
   const playButton = document.querySelector("#play");
@@ -23,7 +23,6 @@ window.addEventListener("load", function () {
   const slowpoke = generateCard (5, "slowpoke");
 
   // Create game instance
-  
   let game = new Game([sylvester, tweety, coyote, roadrunner, bunny, cazador, marvin_marciano, pato_lucas, speedy_gonzalez, slowpoke], new Chronometer(MAX_TIME) );
 
   // Switch among different screens
@@ -46,8 +45,6 @@ window.addEventListener("load", function () {
     startButton.classList.remove("hidden");
     game = new Game ([sylvester, tweety, coyote, roadrunner, bunny, cazador, marvin_marciano, pato_lucas, speedy_gonzalez, slowpoke], new Chronometer(MAX_TIME) );
     game.prepareCards();
-   
-  
   });
 
   playAgain.addEventListener("click", function () {
@@ -56,7 +53,6 @@ window.addEventListener("load", function () {
     startButton.classList.remove("hidden");
     game = new Game ([sylvester, tweety, coyote, roadrunner, bunny, cazador, marvin_marciano, pato_lucas, speedy_gonzalez, slowpoke], new Chronometer(MAX_TIME) );
     game.prepareCards();
-    
   });
 
 });
@@ -81,7 +77,6 @@ class Game {
 
   printTime() {
     this.intervalId = setInterval(() => {
-      // const min = this.chrono.getMinutes();
       const sec = this.chrono.getSeconds();
       const timerDOM = document.querySelector("#countdown");
       timerDOM.innerHTML = sec;
@@ -89,7 +84,6 @@ class Game {
       // MOVE TO THE GAME OVER SCREEN
       if(sec === 0){
         this.chrono.stop();
-        
         const gameScreen = document.querySelector("#game-screen");
         const gameOverScreen = document.querySelector("#gameover");
         setTimeout(function(){
@@ -97,20 +91,13 @@ class Game {
           gameScreen.classList.add("hidden");
         }, 500);
         console.log("GAME OVER");
-        clearInterval(this.intervalId); // resetear el timer
+        clearInterval(this.intervalId);
       }
-      
-      
     }, 1000);
-    
     
   }
   
   prepareCards(){
-    // GET TIMER OUT OF PREPARECARDS();
-    //this.chrono.start();
-    //this.printTime();
-
     const timerDOM = document.querySelector("#countdown");
     timerDOM.innerHTML = MAX_TIME;
     
@@ -161,20 +148,16 @@ class Game {
             this.selectedCard = null; 
 
             // MOVE TO THE WIN SCREEN
-            
             if (this.solvedPairs.length == (this.cards.length/2)) {
               const gameScreen = document.querySelector("#game-screen");
               const winScreen = document.querySelector("#win-screen");
               this.chrono.stop();
-              /*const timerDOM = document.querySelector("#countdown");
-              timerDOM.innerHTML = this.counter;*/
               setTimeout(function(){
                 winScreen.classList.remove("hidden");
                 gameScreen.classList.add("hidden");
-                ////
-              }, 2000);
+              }, 500);
               console.log("WINNER");
-              clearTimeout(this.intervalId); // resetear el timer
+              clearTimeout(this.intervalId);
             }
 
           } else {
