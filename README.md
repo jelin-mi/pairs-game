@@ -59,4 +59,6 @@ Definition of the different states and their transition (transition functions):
 
 ## Links
 
+Design [here](https://www.canva.com/design/DAEutK1Y8ps/jbv-dcAjTEiAqXYam6hKDw/view?utm_content=DAEutK1Y8ps&utm_campaign=designshare&utm_medium=link&utm_source=sharebutton)
+
 You can play here. --> ADD A LINK
